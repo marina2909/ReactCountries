@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CountryList from './countrylist';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import countries from './countryInfo.json'
+import PopulationChart from './populationChart';
 
 class App extends React.Component {
 	constructor(props) {
@@ -10,12 +13,12 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				 jkjkjkjk
-				 {countries.length}
+				<PopulationChart countries={countries}/>
+				<CountryList countries={countries} />
 			</div>
 		);
 	}
 }
 
 
-ReactDOM.render(<App/>, document.getElementById('main-container'));
+ReactDOM.render(<App />, document.getElementById('main-container'));

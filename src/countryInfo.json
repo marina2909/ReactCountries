@@ -1045,17 +1045,6 @@
     "CurrencyName": "Dollar"
   },
   {
-    "#ISO": "HM",
-    "fips": "HM",
-    "Country": "Heard Island and McDonald Islands",
-    "Capital": "",
-    "Area": 412,
-    "Population": 0,
-    "Continent": "AN",
-    "CurrencyCode": "AUD",
-    "CurrencyName": "Dollar"
-  },
-  {
     "#ISO": "HN",
     "fips": "HO",
     "Country": "Honduras",

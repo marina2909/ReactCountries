@@ -1,24 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CountryList from './countrylist';
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import countries from './countryInfo.json'
+import {Router, Route, hashHistory} from 'react-router';
+import App from './app';
 import PopulationChart from './populationChart';
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
-		return (
-			<div className="container">
-				<PopulationChart countries={countries}/>
-				<CountryList countries={countries} />
-			</div>
-		);
-	}
-}
+ReactDOM.render(
+	<Router history={hashHistory}>
+		<Route path="/" component={App} />
+		<Route path="populationChart" component={PopulationChart} />
+	</Router>,
+	document.getElementById('main-container')
+);
 
 
-ReactDOM.render(<App />, document.getElementById('main-container'));
+
+
+

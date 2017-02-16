@@ -8,7 +8,6 @@ export default class CountryList extends React.Component{
 	render() {
 		return (
 			<div>
-				<h1>Countries</h1>
 				<table className="table table-hover">
 				    <thead>
 				      <tr>
@@ -21,7 +20,7 @@ export default class CountryList extends React.Component{
 				    </thead>
 				    <tbody>
 				    	{this.props.countries.map((c,i) => (
-							<tr key={i}>
+							<tr key={i} className="success">
 								<td className="col-md-2"> 
 									{c.Country} 
 								</td>

@@ -4,14 +4,20 @@ import Button from './button';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 export default class PopulationChart extends React.Component{
-		constructor(props){
+	constructor(props){
 		super(props);
 		this.state = {
 			show: 'all'
 		};
 		
 		this.countries = countries;
-		this.countries.sort((a, b) => b.Population - a.Population);
+		this._prepareCountries(this.countries);
+	}
+
+	_prepareCountries(countries){
+		countries.forEach(c => 
+			c.Country = c.Country.length > 15 ? `${c.Country.substring(0, 15)}...` : c.Country)
+		.sort((a, b) => b.Population - a.Population);
 	}
 
 	_getCountries(){

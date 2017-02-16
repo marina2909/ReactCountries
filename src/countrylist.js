@@ -9,17 +9,17 @@ export default class CountryList extends React.Component{
 		return (
 			<div>
 				<table className="table table-hover">
-				    <thead>
-				      <tr>
-				        <th>Name</th>
-				        <th>Capital</th>
-				        <th>Area</th>
-				        <th>Population</th>
-				        <th>Continent</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-				    	{this.props.countries.map((c,i) => (
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Capital</th>
+							<th>Area</th>
+							<th>Population</th>
+							<th>Continent</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.props.countries.map((c,i) => (
 							<tr key={i} className="success">
 								<td className="col-md-2"> 
 									{c.Country} 
@@ -38,8 +38,8 @@ export default class CountryList extends React.Component{
 								</td>
 							</tr>
 						))} 
-				    </tbody>
-			  	</table>
+					</tbody>
+				</table>
 			</div>
 		);
 	}

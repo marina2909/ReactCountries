@@ -4,9 +4,10 @@
   "description": "Countries",
   "main": "index.html",
   "author": "Marina Sovic",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server"
+    "start": "node node_modules/http-server/bin/http-server",
+    "build": "./node_modules/.bin/webpack"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",

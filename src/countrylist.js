@@ -1,11 +1,13 @@
 import React from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import countries from './countryInfo.json';
 import Button from './button';
 
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			countries: this.props.route.countries
+		};
 	}
 
 	render() {
@@ -25,7 +27,7 @@ export default class App extends React.Component {
 							</tr>
 						</thead>
 						<tbody>
-							{countries.map((c,i) => (
+							{this.state.countries.map((c,i) => (
 								<tr key={i} className="success">
 									<td className="col-md-2"> 
 										{c.Country} 

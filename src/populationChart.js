@@ -1,5 +1,4 @@
 import React from 'react';
-import countries from './countryInfo.json';
 import Button from './button';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
@@ -7,43 +6,32 @@ export default class PopulationChart extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			show: 'all'
+			show: 'all',
+			countriesOnGraph: this.props.route.countries,
+			country1: '',
+			country2: ''
 		};
-		
-		this.countries = countries;
-		this._prepareCountries(this.countries);
-
 		this._onShowGraph = this._onShowGraph.bind(this);
 	}
 
-	_prepareCountries(countries){
-		countries.forEach(c => c.Country = c.Country.length > 15 ? `${c.Country.substring(0, 15)}...` : c.Country);
-		countries.sort((a, b) => b.Population - a.Population);
-	}
-
-	_getCountries(){
-		if (this.state.show == 'all') {
-			return this.countries;
-		} else if (this.state.show == 'max10'){
-			return this.countries.slice(0, 10);
-		} else if (this.state.show == 'compare'){
-			return this.countries.filter(c => 
-				c.Country == this.country1.value || c.Country == this.country2.value);
+	_setCountriesOnGraph(show){
+		let countries = [];
+		if (show == 'all') {
+			countries = this.props.route.countries;
+		} else if (show == 'max10'){
+			countries = this.props.route.countries.slice(0, 10);
+		} else if (show == 'compare'){
+			countries = this.props.route.countries.filter(c => 
+				c.Country == this.state.country1 || c.Country == this.state.country2);
 		}
+		this.setState({countriesOnGraph: countries, show: show});
 	}
 
 	_onShowGraph(showChoice){
-		this.setState({show: showChoice});
+		this._setCountriesOnGraph(showChoice)
 		if (showChoice != 'compare'){
-			this.country1.value = null;
-			this.country2.value = null;
+			this.setState({country1 : '', country2: ''});
 		}
-	}
-
-	componentDidMount(){
-		let options = '';
-		this.countries.forEach(c => options+=`<option value="${c.Country}" />`);
-		this.datalistCountries.innerHTML = options;
 	}
 
 	render() {
@@ -56,7 +44,7 @@ export default class PopulationChart extends React.Component{
 				</h1>
 				<BarChart width={1000} 
 					height={420} 
-					data={this._getCountries()} 
+					data={this.state.countriesOnGraph} 
 					margin={{top: 5, right: 30, left: 40, bottom: 5}}>
 					<XAxis dataKey="Country" />
 					<YAxis tickFormatter={v => v.toLocaleString()} />
@@ -82,22 +70,26 @@ export default class PopulationChart extends React.Component{
 						</span>
 						<span className="col-md-2 col-md-offset-2">
 							<input list="countries" 
-								ref={input => this.country1 = input}
 								placeholder="Choose country 1" 
-								className="form-control" />
+								className="form-control"
+								value={this.state.country1}
+								onChange={evt => this.setState({country1 : evt.target.value })}/>
+	
 						</span>
 						<span className="col-md-2">
 							<input list="countries" 
-								ref={input => this.country2 = input}
 								placeholder="Choose country 2"
-								className="form-control" />
+								className="form-control"
+								value={this.state.country2}
+								onChange={evt => this.setState({country2 : evt.target.value })}/>
 						</span>
 						<span onClick={() => this._onShowGraph('compare')} 
 							className="col-md-1">
 							<Button title="Compare 2 countries" />
 						</span> 
-						<datalist id="countries"
-							ref={input => this.datalistCountries = input} />
+						<datalist id="countries">
+							{this.props.route.countries.map(c => <option key={c.Country} value={c.Country} />)}
+						</datalist>
 					</div>
 				</div>
 			</div>

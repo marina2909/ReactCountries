@@ -319,17 +319,6 @@
     "CurrencyName": "Boliviano"
   },
   {
-    "#ISO": "BQ",
-    "fips": "",
-    "Country": "Bonaire",
-    "Capital": "Saint Eustatius and Saba",
-    "Area": "",
-    "Population": 328,
-    "Continent": 18012,
-    "CurrencyCode": ".bq",
-    "CurrencyName": "USD"
-  },
-  {
     "#ISO": "BR",
     "fips": "BR",
     "Country": "Brazil",

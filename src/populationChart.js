@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './button';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
+
 export default class PopulationChart extends React.Component{
 	constructor(props){
 		super(props);
@@ -42,30 +43,37 @@ export default class PopulationChart extends React.Component{
 					{ this.state.show == 'max10' && '(max 10 countries)' }	
 					{ this.state.show == 'all' && '(all countries)' }
 				</h1>
-				<BarChart width={1000} 
-					height={420} 
-					data={this.state.countriesOnGraph} 
-					margin={{top: 5, right: 30, left: 40, bottom: 5}}>
-					<XAxis dataKey="Country" />
-					<YAxis tickFormatter={v => v.toLocaleString()} />
-					<CartesianGrid strokeDasharray="3 3" />
-					<Tooltip formatter={v => v.toLocaleString()} />
-					<Legend />
-					<Bar dataKey="Population" fill="#82ca9d" />
-				</BarChart>
+				<div className="row">
+					<span className="col-md-8">
+						<PopulationChart.Chart 
+							dataKey = "Population"
+							fill = "#82ca9d"
+							width = {700}
+							height = {400}
+							countriesOnGraph = {this.state.countriesOnGraph}/>
+					</span>
+					<span className="col-md-3">
+						<PopulationChart.Chart 
+							dataKey = "Area"
+							fill = "#F39C12"
+							width = {350}
+							height = {200}
+							countriesOnGraph = {this.state.countriesOnGraph}/>
+					</span>
+				</div>
 				<div className="panel panel-primary">
 					<div className="panel-body">
 						<span className="col-md-2">
 							{ 	
 								this.state.show == 'all' ? 
-								<span onClick={() => this._onShowGraph('max10')} 
-									className="col-md-1 col-md-offset-1">
-									<Button title="Show top 10 countries" />
-								</span> : 
-								<span onClick={() => this._onShowGraph('all')} 
-									className="col-md-1 col-md-offset-1">
-									<Button title="Show all countries" />
-								</span> 
+								<Button
+									onClick={() => this._onShowGraph('max10')} 
+									className="col-md-1 col-md-offset-1"
+									title="Show top 10 countries" /> : 
+								<Button
+									onClick={() => this._onShowGraph('all')}  
+									className="col-md-1 col-md-offset-1"
+									title="Show all countries" />
 							}
 						</span>
 						<span className="col-md-2 col-md-offset-2">
@@ -83,16 +91,36 @@ export default class PopulationChart extends React.Component{
 								value={this.state.country2}
 								onChange={evt => this.setState({country2 : evt.target.value })}/>
 						</span>
-						<span onClick={() => this._onShowGraph('compare')} 
-							className="col-md-1">
-							<Button title="Compare 2 countries" />
-						</span> 
+						<Button onClick={() => this._onShowGraph('compare')} 
+							className="col-md-1"
+							title="Compare 2 countries" /> 
 						<datalist id="countries">
 							{this.props.route.countries.map(c => <option key={c.Country} value={c.Country} />)}
 						</datalist>
 					</div>
 				</div>
 			</div>
+		);
+	}
+}
+
+PopulationChart.Chart = class extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	render() {
+		return(
+				<BarChart width={this.props.width} 
+					height={this.props.height} 
+					data={this.props.countriesOnGraph} 
+					margin={{top: 5, right: 30, left: 40, bottom: 5}}>
+					<XAxis dataKey="Country" />
+					<YAxis tickFormatter={v => v.toLocaleString()} />
+					<CartesianGrid strokeDasharray="3 3" />
+					<Tooltip formatter={v => v.toLocaleString()} />
+					<Legend />
+					<Bar dataKey={this.props.dataKey} fill={this.props.fill} />
+				</BarChart>
 		);
 	}
 }

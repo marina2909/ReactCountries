@@ -34,6 +34,10 @@ export default class PopulationChart extends React.Component{
 
 	_onShowGraph(showChoice){
 		this.setState({show: showChoice});
+		if (showChoice != 'compare'){
+			this.country1.value = null;
+			this.country2.value = null;
+		}
 	}
 
 	componentDidMount(){
@@ -46,7 +50,10 @@ export default class PopulationChart extends React.Component{
 		return (
 			<div>
 				<span className="col-md-1 col-md-offset-1"><Button title="Home" link='/'/></span>
-				<h1>Population by country</h1>
+				<h1>Population by country 
+					{ this.state.show == 'max10' && '(max 10 countries)' }	
+					{ this.state.show == 'all' && '(all countries)' }
+				</h1>
 				<BarChart width={1000} 
 					height={420} 
 					data={this._getCountries()} 

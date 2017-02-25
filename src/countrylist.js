@@ -14,12 +14,14 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Countries</h1>
-				<Button title="Population chart" link="/populationChart" />
-				<div>
+				<div className="text-left margin-top-1">
+					<Button title="Back to population chart" link="/" />
+				</div>
+				<h1 className="text-center">Countries</h1>
+				<div className="margin-top-2">
 					<table className="table table-hover">
 						<thead>
-							<tr>
+							<tr className="list-header">
 								<th>Name</th>
 								<th>Capital</th>
 								<th>Area</th>

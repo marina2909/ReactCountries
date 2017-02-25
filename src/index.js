@@ -20,10 +20,11 @@ class Application extends React.Component {
 		return (
 			<div>
 				<Router history={hashHistory}>
-					<Route path="/" component={Countries} countries={countries} />
-					<Route path="populationChart" component={PopulationChart} countries={countries} />
+					<Route path="/" component={PopulationChart} countries={countries} />
+					<Route path="/charts/(:country1)(/:country2)" component={PopulationChart} countries={countries} />
+					<Route path="countrylist" component={Countries} countries={countries} />
 				</Router>
-			</div>
+			</div> 
 		)
 	}
 }

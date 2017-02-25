@@ -38,30 +38,12 @@ export default class PopulationChart extends React.Component{
 	render() {
 		return (
 			<div>
-				<span className="col-md-1 col-md-offset-1"><Button title="Home" link='/'/></span>
-				<h1>Population by country 
+				<h1 className="text-center">Population by country 
 					{ this.state.show == 'max10' && '(max 10 countries)' }	
 					{ this.state.show == 'all' && '(all countries)' }
 				</h1>
-				<div className="row">
-					<span className="col-md-8">
-						<PopulationChart.Chart 
-							dataKey = "Population"
-							fill = "#82ca9d"
-							width = {700}
-							height = {400}
-							countriesOnGraph = {this.state.countriesOnGraph}/>
-					</span>
-					<span className="col-md-3">
-						<PopulationChart.Chart 
-							dataKey = "Area"
-							fill = "#F39C12"
-							width = {350}
-							height = {200}
-							countriesOnGraph = {this.state.countriesOnGraph}/>
-					</span>
-				</div>
-				<div className="panel panel-primary">
+				<div className="text-right"><Button title="List countries" link='/'/></div>
+				<div className="panel panel-primary margin-top-3">
 					<div className="panel-body">
 						<span className="col-md-2">
 							{ 	
@@ -99,6 +81,25 @@ export default class PopulationChart extends React.Component{
 						</datalist>
 					</div>
 				</div>
+				<div className="row">
+					<span className="col-md-6">
+						<PopulationChart.Chart 
+							dataKey = "Population"
+							fill = "#82ca9d"
+							width = {600}
+							height = {360}
+							countriesOnGraph = {this.state.countriesOnGraph}/>
+					</span>
+					<span className="col-md-6">
+						<PopulationChart.Chart 
+							dataKey = "Area"
+							fill = "#F39C12"
+							width = {600}
+							height = {360}
+							countriesOnGraph = {this.state.countriesOnGraph}/>
+					</span>
+				</div>
+				
 			</div>
 		);
 	}

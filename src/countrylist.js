@@ -1,6 +1,7 @@
 import React from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import Button from './button';
+import style from './style.css';
 
 export default class App extends React.Component {
 	constructor(props) {
